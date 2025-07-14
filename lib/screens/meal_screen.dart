@@ -23,18 +23,23 @@ class MealScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
+          Text("Youtube link: "),
+          SizedBox(
+            height: 2,
+          ),
           GestureDetector(
             onTap: () async {
               final Uri url = Uri.parse(meal.link);
               await launchUrl(url, mode: LaunchMode.externalApplication);
             },
-            child: Text(
-              "Youtube link: ${meal.link}",
-              style: TextStyle(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
+            child:Text(
+                meal.link,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
               ),
-            ),
           )
         ],
       ),
