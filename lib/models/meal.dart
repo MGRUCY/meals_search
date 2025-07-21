@@ -5,7 +5,6 @@ class Meal {
   final String area;
   final String link;
 
-
   Meal({
     required this.id,
     required this.name,
