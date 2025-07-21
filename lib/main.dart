@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'screens/meal_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,11 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/detail': (context) => const MealScreen(),
-      },
+      title: 'Meals App',
+      theme: ThemeData(primarySwatch: Colors.orange),
+      home: const HomeScreen(),
     );
   }
 }

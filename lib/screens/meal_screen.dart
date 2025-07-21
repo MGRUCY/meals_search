@@ -1,47 +1,54 @@
 import 'package:flutter/material.dart';
-import '../models/meal.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../models/meal.dart';
+import '../widgets/nickname_form.dart';
+import '../widgets/star_rating.dart';
+import '../widgets/save_button.dart';
 
-class MealScreen extends StatelessWidget {
-  const MealScreen({super.key});
+class MealScreen extends StatefulWidget {
+  final Meal meal;
+  const MealScreen({super.key, required this.meal});
+
+  @override
+  State<MealScreen> createState() => _MealScreenState();
+}
+
+class _MealScreenState extends State<MealScreen> {
+  String nickname = '';
+  double rating = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    final meal = ModalRoute.of(context)!.settings.arguments as Meal;
+    final meal = widget.meal;
     return Scaffold(
       appBar: AppBar(title: Text(meal.name)),
-      body: Column(
-        children: [
-          Center(child: Image.network(meal.thumbnail)),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "This meal is ${meal.area}",
-            style: const TextStyle(fontSize: 32),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Youtube link: "),
-          SizedBox(
-            height: 2,
-          ),
-          GestureDetector(
-            onTap: () async {
-              final Uri url = Uri.parse(meal.link);
-              await launchUrl(url, mode: LaunchMode.externalApplication);
-            },
-            child:Text(
-                meal.link,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.network(meal.thumbnail),
+            const SizedBox(height: 10),
+            Text("This meal is ${meal.area}", style: const TextStyle(fontSize: 24)),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () async {
+                final Uri url = Uri.parse(meal.link);
+                await launchUrl(url);
+              },
+              child: Text(meal.link, style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
+            ),
+            const SizedBox(height: 16),
+            NicknameForm(onSaved: (value) {
+              setState(() => nickname = value);
+            }),
+            const SizedBox(height: 10),
+            StarRating(
+              rating: rating,
+              onRatingChanged: (newRating) => setState(() => rating = newRating),
+            ),
+            const SizedBox(height: 10),
+            SaveButton(nickname: nickname, meal: meal, rating: rating),
+          ],
+        ),
       ),
     );
   }
