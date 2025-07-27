@@ -3,7 +3,6 @@ class MealRating {
   final String nickname;
   final double rating;
   final String mealName;
-  
 
   MealRating({
     required this.mealId,
@@ -16,13 +15,13 @@ class MealRating {
         'mealId': mealId,
         'nickname': nickname,
         'rating': rating,
-        'strMeal': mealName,
+        'mealName': mealName,
       };
 
   factory MealRating.fromJson(Map<String, dynamic> json) => MealRating(
         mealId: json['mealId'],
         nickname: json['nickname'],
         rating: (json['rating'] as num).toDouble(),
-        mealName: json['strMeal'],
+        mealName: json['mealName'], 
       );
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/meal_rating.dart';
 
@@ -12,6 +11,8 @@ class MealStorage {
 
     ratings.add(jsonEncode(mr.toJson()));
     await prefs.setStringList(key, ratings);
+
+     print('💾 Saved rating to SharedPreferences: $json');
   }
 
   static Future<List<MealRating>> loadRatings() async {

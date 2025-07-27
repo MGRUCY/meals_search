@@ -12,6 +12,11 @@ class SavedRatingsScreen extends StatefulWidget {
 class _SavedRatingsScreenState extends State<SavedRatingsScreen> {
   _loadRatings() async {
     pubg = await MealStorage.loadRatings();
+    pubg = await MealStorage.loadRatings();
+    print('Loaded ${pubg.length} ratings');
+    for (var r in pubg) {
+      print('Meal: ${r.mealName}, Nick: ${r.nickname}, Rating: ${r.rating}');
+    }
     setState(() {
       
     });
@@ -23,6 +28,7 @@ class _SavedRatingsScreenState extends State<SavedRatingsScreen> {
     _loadRatings();
     super.initState();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,6 @@ class _SavedRatingsScreenState extends State<SavedRatingsScreen> {
           itemCount: pubg.length,
           itemBuilder: (context, index) {
             final rating = pubg[index];
-
             return ListTile(
               title: Text('Meal: ${rating.mealName}'),
               subtitle: Text('Nickname: ${rating.nickname}'),

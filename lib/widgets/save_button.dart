@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../models/meal.dart'; 
 import '../models/meal_rating.dart'; 
@@ -26,13 +28,8 @@ class SaveButton extends StatelessWidget {
           nickname: nickname,
           rating: rating,
         );
-        
-
         await MealStorage.saveRating(ratingData);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Rating saved!')),
-        );
+        print('✅ Saved: ${jsonEncode(ratingData.toJson())}');
       },
     );
   }
