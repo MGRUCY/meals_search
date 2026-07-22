@@ -6,9 +6,9 @@ import '../widgets/star_rating.dart';
 import '../widgets/save_button.dart';
 
 class MealScreen extends StatefulWidget {
-  final Meal meal;
   const MealScreen({super.key, required this.meal});
-
+  final Meal meal;
+  
   @override
   State<MealScreen> createState() => _MealScreenState();
 }
@@ -27,14 +27,18 @@ class _MealScreenState extends State<MealScreen> {
           children: [
             Image.network(meal.thumbnail),
             const SizedBox(height: 10),
-            Text("This meal is ${meal.area}", style: const TextStyle(fontSize: 24)),
+            Text("This meal is ${meal.area}",
+                style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () async {
                 final Uri url = Uri.parse(meal.link);
                 await launchUrl(url);
               },
-              child: Text(meal.link, style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
+              child: Text(meal.link,
+                  style: const TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline)),
             ),
             const SizedBox(height: 16),
             NicknameForm(onSaved: (value) {
@@ -43,7 +47,8 @@ class _MealScreenState extends State<MealScreen> {
             const SizedBox(height: 10),
             StarRating(
               rating: rating,
-              onRatingChanged: (newRating) => setState(() => rating = newRating),
+              onRatingChanged: (newRating) =>
+                  setState(() => rating = newRating),
             ),
             const SizedBox(height: 10),
             SaveButton(nickname: nickname, meal: meal, rating: rating),
